@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<!--
+Morgan Yeh 
+2024/12/21
+ZBLS Trainer trainer screen
+-->
+<html>
+    <head>
+        <title>ZBLS Trainer</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="trainer-style.css">
+    </head>
+    <body>
+
+        <header>
+            <button type="button" id="back" onclick="goBack()">Select Cases</button>
+            <p id="numSelected"></p>
+            <p id="numRecap"></p>
+        </header>
+
+        <div class="content">
+            <div class="scramble">Scramble: </div>
+            <div class="container">
+                <div class="timer-display">0.00
+                    
+                </div>
+                
+                <div class="case-info">
+                    <div class="case-info-top">
+                        <p id="case-text">Press Space to Begin</p>
+                        <p id="case-time" hidden></p>
+                        <button type="button" id="again" onclick="recapCaseAgain()" hidden>Again</button>
+                    </div>
+                    <img id="case-img" src="" alt="">
+                    <p id="case-name"></p>
+                    <p id="case-scram"></p>
+                    <p id="case-algs"></p>
+                        
+                </div>   
+            </div>
+
+        </div>
+
+
+        <script src="algorithms.js"></script>
+        <script src="scrambles.js"></script>
+        <script src="zblsCase.js"></script>
+        <script src="trainer-screen.js"></script>
+    </body>
+</html>
