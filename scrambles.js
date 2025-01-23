@@ -1415,6 +1415,6 @@ const scrambleArray = [4,
     "F' U2 L' B' U B L F R U R'",
     "F' U2 R' L F2 L' F2 R F R U R'",
     "F' R' F2 L F2 R L' U2 F R U R'",
-    "F' L' U2 F' L D F R U F R' D"];
+    "F' L' U2 F' L D F R U F R' D'"];
 
 sessionStorage.setItem("scrambles", JSON.stringify(scrambleArray));
