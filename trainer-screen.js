@@ -211,23 +211,27 @@ function recapCaseAgain() {
     var name = document.querySelector("#case-name").innerHTML;
     var c;
 
-    
+
 
     if (againClicked === false) {
-        alert("Recap case again?");
-        
-        for (var i = 0; i < toTrain.length; i++) {
-            var train = toTrain[i];
 
-            if (train.getName() === name) {
-                c = train;
+        if (confirm("Recap case again?")) {
+            for (var i = 0; i < toTrain.length; i++) {
+                var train = toTrain[i];
+
+                if (train.getName() === name) {
+                    c = train;
+                }
             }
+
+            toRecap.push(c);
+            displayCaseCount(toRecap, "numRecap", "to recap");
+            againClicked = true;
+            document.querySelector("#again").hidden = true;
         }
 
-        toRecap.push(c);
-        displayCaseCount(toRecap, "numRecap", "to recap");
-        againClicked = true;
-        document.querySelector("#again").hidden = true;
+
+
     }
 
 }
@@ -289,7 +293,7 @@ window.addEventListener('keydown', (event) => {
 
         //change text color
         timerRef.style.color = "#E34234";
-    } else if(event.key === "Backspace" && recap 
+    } else if (event.key === "Backspace" && recap
             && toTrain.length !== toRecap.length) { //shortcut for recap again
         recapCaseAgain();
     }
