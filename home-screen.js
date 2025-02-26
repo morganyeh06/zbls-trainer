@@ -5,20 +5,65 @@
 
 const F2LCount = document.getElementsByClassName('grid-container').length;
 const coll = document.querySelectorAll(".collapsible");
+const pre = document.querySelector("#preset-collapsible");
 const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+var dropdown = document.querySelector("#select");
+var presets = [null];
+var len = 1; // number of options in dropdown
+
+//get NodeList of all zbls cases and convert to array
+var nlCases = document.getElementsByName("case");
+var cases = Array.from(nlCases);
+
+
+
 
 //open and collapse F2L Selection
-for (var i = 0; i < coll.length; i++) {
+for (var i = 1; i < coll.length; i++) {
     coll[i].addEventListener("click", function () {
         this.classList.toggle("active");
         var content = this.nextElementSibling;
         if (content.style.maxHeight) {
             content.style.maxHeight = null;
+            content.style.border = "none";
         } else {
             content.style.maxHeight = content.scrollHeight + "px";
         }
     });
 }
+
+
+// open and close preset content
+pre.addEventListener("click", function () {
+    this.classList.toggle("active");
+    var content = this.nextElementSibling;
+    if (content.style.maxHeight) {
+        content.style.maxHeight = null;
+        pre.style.background = "#E5E4E2";
+
+        // hide border, change button radius after 0.2s (after collapsed)
+        setTimeout(function () {
+            content.style.border = "none";
+            pre.style.borderBottomRightRadius = "5px";
+            pre.style.borderBottomLeftRadius = "5px";
+            
+        }, 200);
+
+    } else {
+        content.style.maxHeight = content.scrollHeight + "px";
+
+        // show border, change radius of button
+        content.style.border = "1px solid black";
+        content.style.borderTop = "none";
+        content.style.borderBottomRightRadius = "5px";
+        content.style.borderBottomLeftRadius = "5px";
+        pre.style.borderBottomRightRadius = "0px";
+        pre.style.borderBottomLeftRadius = "0px";
+        
+    }
+});
+
+
 
 // display number of cases selected
 document.querySelectorAll("input[type=checkbox]").forEach(i => {
@@ -40,7 +85,9 @@ checkboxes.forEach((checkbox) => {
 
 // Load checkbox states on page load
 document.addEventListener('DOMContentLoaded', loadCheckboxStates);
-
+document.addEventListener('DOMContentLoaded', loadPresets);
+document.addEventListener('DOMContentLoaded', pre.dispatchEvent(new Event("click")));
+//window.onload(pre.dispatchEvent(new Event("click")));
 
 
 /**
@@ -68,6 +115,161 @@ function loadCheckboxStates() {
 }
 
 
+/*
+ * saves all presets to local storage
+ * @returns {undefined}
+ */
+function savePresetsToLocal() {
+
+    localStorage.setItem("len", len);
+
+    for (let i = 1; i < dropdown.length; i++) {
+        //store option value in a string, store string in local storage
+        var optionName = dropdown.options.item(i).text;
+
+        localStorage.setItem("option " + i, optionName);
+        localStorage.setItem("preset " + i, JSON.stringify(presets[i]));
+
+    }
+
+}
+/**
+ * loads presets saved in memory
+ */
+function loadPresets() {
+    len = localStorage.getItem("len");
+
+
+    for (let i = 1; i < len; i++) {
+        // get option and preset and add to arrays
+        var optionName = localStorage.getItem("option " + i);
+        var opt = document.createElement("option");
+        opt.text = optionName;
+
+        var pre = JSON.parse(localStorage.getItem("preset " + i));
+
+        dropdown.add(opt);
+        presets.push(pre);
+    }
+
+    //console.log(len);
+    //console.log(dropdown.options);
+    //console.log(presets);
+}
+
+/**
+ * adds a new preset to list of dropdown options
+ */
+function savePreset() {
+    var inputBox = document.getElementById("new-input");
+    var name = inputBox.value;
+
+    if (name !== "") {
+        var option = document.createElement("option");
+        option.text = name;
+
+        //check if option already exists
+        if (presetExists(name)) {
+            //confirm if preset should be replaced
+            if (confirm(name + " already exists. Do you want to replace it?")) {
+                var index = getOptionIndex(name);
+                presets[index] = getInfo(cases, isCaseSelected);
+
+            }
+
+        } else {
+            //add option to end of array/collection
+            dropdown.add(option);
+            presets.push(getInfo(cases, isCaseSelected));
+            dropdown.selectedIndex = presets.length - 1;
+            len++;
+        }
+
+        // save options and presets in localStorage
+        savePresetsToLocal();
+
+    }
+}
+
+/**
+ * removes the selected preset from the dropdown menu
+ */
+function removePreset() {
+    var index = dropdown.selectedIndex;
+
+    if (index !== 0 && confirm("Delete preset?")) {
+        //remove element at index from presets, remove from dropdown
+        presets.splice(index, 1);
+        dropdown.remove(index);
+        len--;
+    }
+
+    savePresetsToLocal();
+}
+
+/**
+ * produces true if val is an existing option in dropdown, false otherwise
+ * @param {String} val - value to check
+ * @returns {Boolean} - whether option already exists
+ */
+function presetExists(val) {
+    for (var i = 0; i < dropdown.options.length; i++) {
+
+        if (dropdown.options[i].value === val) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+/**
+ * returns the index of collection an option occupies
+ * @param {type} val - value of option
+ * @returns {Number} - index of option
+ */
+function getOptionIndex(val) {
+    for (var i = 0; i < dropdown.options.length; i++) {
+        name = dropdown.options[i].value;
+
+        if (name === val) {
+            return i;
+        }
+    }
+}
+
+/**
+ * applies a selected preset
+ */
+function applyPreset() {
+    var index = dropdown.selectedIndex;
+
+    if (index !== 0) {
+        //set selected cases to preset, display count
+        var selectedCases = presets[index];
+
+        for (var i = 0; i < selectedCases.length; i++) {
+            var state = cases[i].checked;
+            var preset_state = selectedCases[i];
+
+            //simulate click on checkbox, save to local storage
+            if (state !== preset_state) {
+                cases[i].checked = preset_state;
+                localStorage.setItem(cases[i].id, preset_state);
+
+                //cases[i].dispatchEvent(new Event("click"));
+            }
+
+            //localStorage.setItem(cases[i].id, cases[i].checked);
+            //showChecked();
+        }
+
+        showChecked();
+
+    }
+
+}
+
 
 
 
@@ -76,9 +278,7 @@ function loadCheckboxStates() {
  * @param {Boolean recap - whether cases should be recapped
  */
 function loadCases(recap) {
-    //get NodeList of all zbls cases and convert to array
-    var nlCases = document.getElementsByName("case");
-    var cases = Array.from(nlCases);
+
     //get case ids, checked status
     var selected = getInfo(cases, isCaseSelected);
     var caseIds = getInfo(cases, getCaseId);
@@ -132,7 +332,9 @@ function getInfo(cases, func) {
  * @param {Boolean} val - whether the elements should be expanded
  */
 function toggleExpand(val) {
-    Array.from(coll).forEach(span => {
+    for (var i = 1; i < coll.length; i++) {
+        var span = coll[i];
+        
         var content = span.nextElementSibling;
         var condition;
         var result;
@@ -151,7 +353,9 @@ function toggleExpand(val) {
             span.classList.toggle("active");
             content.style.maxHeight = result;
         }
-    });
+    }
+    
+    
 }
 
 
@@ -164,10 +368,14 @@ function toggleAll(val) {
 
     //change value for each ZBLS case
     for (var i = 0; i < toggles.length; i++) {
-        //select or deselect the toggleGroup and apply val to cases in group
-        toggles[i].checked = val;
-        toggles[i].dispatchEvent(new Event("click")); //trigger a click
-        toggleSelectGroup(toggles[i]);
+        if (toggles[i].checked !== val) {
+            //select or deselect the toggleGroup and apply val to cases in group
+            toggles[i].checked = val;
+            //toggles[i].dispatchEvent(new Event("click")); //trigger a click
+            toggleSelectGroup(toggles[i]);
+        }
+
+
     }
 }
 
@@ -178,10 +386,15 @@ function toggleAll(val) {
 function toggleSelectGroup(cb) {
     var num = cb.getAttribute("id");
     var cases = document.querySelectorAll(".F2L" + num);
+    var val = cb.checked;
 
     for (var i = 0; i < cases.length; i++) {
-        //value of all cases is whether cb is checked or not
-        cases[i].checked = cb.checked;
+        if (cases[i].checked !== val) {
+            //value of all cases is whether cb is checked or not
+            cases[i].checked = val;
+            localStorage.setItem(cases[i].id, val);
+        }
+
     }
 
     //display number of cases selected
