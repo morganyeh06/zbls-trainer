@@ -9,7 +9,7 @@ Style Sheet for home screen
 
 body {
     background-color: #eeeeee;
-    font-family: "Tahoma";
+    font-family: "Tahoma", "Arial";
 }
 
 
@@ -17,20 +17,156 @@ header {
     text-align: center;
 }
 
+
+
 #container {
     margin-top: 30px;
     margin-bottom: 50px;
 }
 
+.presetContainer {
+    margin-bottom: 30px;
+}
+
+#preset-box {
+    transform: scale(1.5);
+    margin-left: 5px;
+    margin-right: 8px;
+    opacity: 0;
+}
+
+.presets-and-info {
+    display: inline-block;
+    width: 90%;
+}
+
+
+
+
+#preset-collapsible {
+    font: "Tahoma";
+    width: 100%;
+    background-color: #E5E4E2;
+}
+
+
+
+.preset-content {
+    box-sizing: border-box;
+    display: block;
+    margin: auto;
+    text-align: center;
+    width: 100%;
+    border: none;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out; /*animate open and collapse*/
+}
+
+.preset-left {
+    display: inline-block;
+    vertical-align:top;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    width: 75%;
+}
+
+.preset-right {
+    display: inline-block;
+    vertical-align: top;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.apply-delete {
+    margin: 0px;
+}
+
+#new-input {
+    font-family: "Tahoma", "Arial";
+    vertical-align: middle;
+    padding: 6px 6px;
+    margin-left: 0px;
+    box-sizing: border-box;
+    width: 100%;
+    border-radius: 4px;
+    margin-bottom: 5px;
+}
+
+#new-input:focus {
+    border: 2px solid #555;
+}
+
+#save-preset {
+    background-color: #6082B6;
+    padding: 6px 15px;
+    display: block; 
+    margin: auto;
+    margin-bottom: 5px;
+    width: 100%;
+}
+
+#save-preset:hover {
+    background-color: #0047AB;
+}
+
+
+.dropdown-container select {
+    padding: 6px 6px;
+    border-radius: 4px;
+    box-sizing: border-box;
+    width: 100%;
+    border: 2px solid black;
+}
+
+.dropdown-container select:hover {
+    cursor: pointer;
+}
+
+.preset-button {
+    font-family: "Tahoma", "Arial";
+    margin-top: 1px;
+    vertical-align: middle;
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    
+}
+
+.preset-button:hover {
+    cursor: pointer;
+}
+
+#apply {
+    
+    background-color: #40B5AD;
+    padding: 6px 12px;
+}
+
+#apply:hover {
+    background-color: #008080;
+}
+
+#delete {
+    
+    background-color: #FA5F55;
+    padding: 6px 10px;
+}
+
+#delete:hover {
+    background-color: #E34234;
+}
+
 .left-block {
-    font-family: "Tahoma";
+    font-family: "Tahoma", "Arial";
     margin-left: 2%;
     display: inline-block;
     width: 60%;
 }
 
 .right-block {
-    font-family: "Tahoma";
+    font-family: "Tahoma", "Arial";
     margin-left: 5%;
     margin-top: 20px;
     display: inline-block;
@@ -41,7 +177,7 @@ header {
 }
 
 .train {
-    font-family: "Tahoma";
+    font-family: "Tahoma", "Arial";
     font-size: 25px;
     text-align: center;
     color: white;
@@ -60,11 +196,11 @@ header {
 }
 
 .train:hover:enabled {
-   box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
 }
 
 #selected {
-    font-family: "Tahoma";
+    font-family: "Tahoma", "Arial";
     margin-top: 40px;
     margin-bottom: 40px;
     font-size: 20px;
@@ -72,7 +208,7 @@ header {
 
 
 .selectToggle {
-    font-family: "Tahoma";
+    font-family: "Tahoma", "Arial";
     display: inline-block;
     color: white;
     text-align: center;
@@ -83,13 +219,13 @@ header {
     width: 110px;
     border: none;
     border-radius: 10px;
-    cursor: pointer;  
+    cursor: pointer;
 }
 
 
 #selectAll {
     background-color: #40B5AD;
-    padding: 10px 20px;  
+    padding: 10px 20px;
 }
 
 #selectAll:hover {
@@ -98,7 +234,7 @@ header {
 
 #deselectAll {
     background-color: #FA5F55;
-    padding: 10px 15px; 
+    padding: 10px 15px;
 }
 
 #deselectAll:hover {
@@ -106,7 +242,7 @@ header {
 }
 
 .collapseToggle {
-    font-family: "Tahoma";
+    font-family: "Tahoma", "Arial";
     display: inline-block;
     background: #C0C0C0;
     color: black;
@@ -163,10 +299,11 @@ header {
 
 .active:after {
     content: "\2796";
+    
 }
 
 .grid-container {
-    margin-left: 31.5px;
+    margin-left: 31.2px;
     max-height: 0;
     overflow: hidden;
     transition: max-height 0.2s ease-out; /*animate open and collapse*/
@@ -190,15 +327,15 @@ header {
     display: none;
 }
 
-.grid-item label {   
+.grid-item label {
     border-radius: 5px;
 }
 
 .grid-item input[type="checkbox"] + label {
     height: 100%;
     width: 100%;
-    
-    float: left;  
+
+    float: left;
     cursor: pointer;
 }
 
