@@ -83,12 +83,18 @@ checkboxes.forEach((checkbox) => {
     checkbox.addEventListener('click', saveCheckboxStates);
 });
 
-// Load checkbox states on page load
-document.addEventListener('DOMContentLoaded', loadCheckboxStates);
-document.addEventListener('DOMContentLoaded', loadPresets);
-document.addEventListener('DOMContentLoaded', pre.dispatchEvent(new Event("click")));
-//window.onload(pre.dispatchEvent(new Event("click")));
+// setup when window loads
+document.addEventListener('DOMContentLoaded', setup);
 
+/**
+ * setup home screen
+ * @returns {undefined}
+ */
+function setup() {
+    loadCheckboxStates();
+    loadPresets();
+    pre.dispatchEvent(new Event("click"));
+}
 
 /**
  * saves checkbox states to Local Storage
@@ -257,11 +263,10 @@ function applyPreset() {
                 cases[i].checked = preset_state;
                 localStorage.setItem(cases[i].id, preset_state);
 
-                //cases[i].dispatchEvent(new Event("click"));
+                
             }
 
-            //localStorage.setItem(cases[i].id, cases[i].checked);
-            //showChecked();
+            
         }
 
         showChecked();
@@ -368,13 +373,9 @@ function toggleAll(val) {
 
     //change value for each ZBLS case
     for (var i = 0; i < toggles.length; i++) {
-        if (toggles[i].checked !== val) {
             //select or deselect the toggleGroup and apply val to cases in group
             toggles[i].checked = val;
-            //toggles[i].dispatchEvent(new Event("click")); //trigger a click
             toggleSelectGroup(toggles[i]);
-        }
-
 
     }
 }
