@@ -11,7 +11,7 @@ ZBLS Trainer home screen
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="home-style.css">
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
     </head>
     <body> 
         <header>
@@ -19,7 +19,44 @@ ZBLS Trainer home screen
         </header>
 
         <div id="container">
+
+
             <div class="left-block">
+                <div class="presetContainer">
+                    <input type="checkbox" id="preset-box" disabled>
+
+                    <div class="presets-and-info">
+                        <button type="button" class="collapsible" id="preset-collapsible">
+                            <b>Presets</b>
+                        </button>
+                        <div class="preset-content">
+                            <div class='preset-left'>
+                                <input type="text" id="new-input" placeholder="New Preset">  
+                                <div class='dropdown-container'>
+                                    <select id="select">
+                                        <option selected>Select an existing preset</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="preset-right">
+                                <button type='button' class='preset-button' id='save-preset' onclick="savePreset()">Save</button>
+                                <div class="apply-delete">
+                                    <button class="preset-button" id='apply' onclick="applyPreset()">Apply</button>
+                                    <button class="preset-button" id='delete' onclick="removePreset()">Delete</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                     
+                        
+                    </div>
+                </div>
+
+
+
+
+
                 <input type="checkbox" class="toggleGroup" id="1">
                 <button type="button" class="collapsible" id="F2L1Button">
                     <b>F2L 1</b> (<span id="F2L1Count">0</span>/8)
@@ -2128,6 +2165,7 @@ ZBLS Trainer home screen
                 <button type="button" onclick="toggleAll(false)" class="selectToggle" id="deselectAll">Deselect All</button>
                 <button type="button" onclick="toggleExpand(true)" class="collapseToggle" id="open">Expand All</button>
                 <button type="button" onclick="toggleExpand(false)" class="collapseToggle" id="close">Collapse All</button>
+
             </div>
         </div>
 
