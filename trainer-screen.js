@@ -25,6 +25,7 @@ var prevCase;
 var prevScramble;
 var count;
 
+var startStopTimer = true;
 var againClicked = false; //again button not clicked by default
 
 //setup trainer
@@ -172,6 +173,7 @@ function displayCaseCount(arr, id, message) {
     }
 
     document.getElementById(id).innerHTML = output;
+    startStopTimer = true;
 }
 
 /**
@@ -211,8 +213,6 @@ function recapCaseAgain() {
     var name = document.querySelector("#case-name").innerHTML;
     var c;
 
-
-
     if (againClicked === false) {
 
         if (confirm("Recap case again?")) {
@@ -229,8 +229,6 @@ function recapCaseAgain() {
             againClicked = true;
             document.querySelector("#again").hidden = true;
         }
-
-
 
     }
 
@@ -279,8 +277,76 @@ function displayTimer() {
 }
 
 
+
+// check if screen held down
+document.addEventListener('touchstart', handleTouchStart, false);
+document.addEventListener('touchend', handleTouchEnd, false);
+document.addEventListener('keydown', handleKeyDown, false);
+document.addEventListener('keyup', handleKeyUp, false);
+
+/*
+ * handles screen tap start
+ */
+function handleTouchStart() {
+    if (event.target.tagName === 'BUTTON') { // do nothing if again button clicked
+        return;
+    }
+    
+    //start or stop timer depending on value of timerStatus
+    if (timerStatus === "Stop") {
+        timerRef.style.color = "#40B5AD";
+    } else if (timerStatus === "Start") {
+        //stop timer and change timerStatus
+        timerStatus = "Paused";
+        clearInterval(int);
+
+        //change text color
+        timerRef.style.color = "#E34234";
+    }
+}
+
+/*
+ * handles screen tap end
+ */
+function handleTouchEnd() {
+    if (event.target.tagName === 'BUTTON') { // do nothing if again button clicked
+        return;
+    }
+
+    //change text to black
+    timerRef.style.color = "black";
+
+    //start or stop timer depending on value of timerStatus
+    if (timerStatus === "Stop") {
+        //reset time and change timerStatus
+        milliseconds = 0;
+
+        if (int !== null) {
+            clearInterval(int);
+        }
+        int = setInterval(displayTimer, 10);
+
+        timerStatus = "Start";
+    } else if (timerStatus === "Paused") {
+        timerStatus = "Stop";
+
+        //remove c from if in recap mode
+        if (recap) {
+            removeElement(prevCase);
+        }
+
+        //generate new scramble and display prevCase information
+        againClicked = false;
+        displayCaseInfo();
+        prevCase = generateScramble();
+
+    }
+}
+
+
+
 // check if space bar is held down
-window.addEventListener('keydown', (event) => {
+function handleKeyDown(event) {
     event.preventDefault();
 
     //start or stop timer depending on value of timerStatus
@@ -297,10 +363,10 @@ window.addEventListener('keydown', (event) => {
             && toTrain.length !== toRecap.length) { //shortcut for recap again
         recapCaseAgain();
     }
-});
+}
 
 //check if spacebar is released
-window.addEventListener('keyup', (event) => {
+function handleKeyUp(event) {
     event.preventDefault();
 
     //change text to black
@@ -331,6 +397,6 @@ window.addEventListener('keyup', (event) => {
         prevCase = generateScramble();
 
     }
-});
+}
 
 
