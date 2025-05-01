@@ -13,5 +13,6 @@ Select the desired cases and click "Save" to save a preset. Use the dropdown men
 
 **Training Algorithms** <br />
 Click the "Start" button to practice the selected cases in a random order, or click "Recap" to view each case once.
-
+Use the spacebar to start/stop the timer, or tap the screen if using on a mobile device.
+When in recap mode, click the "Again" button to practice the previous case again.
 
