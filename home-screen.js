@@ -16,8 +16,6 @@ var nlCases = document.getElementsByName("case");
 var cases = Array.from(nlCases);
 
 
-
-
 //open and collapse F2L Selection
 for (var i = 1; i < coll.length; i++) {
     coll[i].addEventListener("click", function () {
@@ -62,8 +60,6 @@ pre.addEventListener("click", function () {
         
     }
 });
-
-
 
 // display number of cases selected
 document.querySelectorAll("input[type=checkbox]").forEach(i => {
@@ -158,9 +154,6 @@ function loadPresets() {
         presets.push(pre);
     }
 
-    //console.log(len);
-    //console.log(dropdown.options);
-    //console.log(presets);
 }
 
 /**
@@ -193,7 +186,7 @@ function savePreset() {
 
         // save options and presets in localStorage
         savePresetsToLocal();
-
+        setTimeout(() => {alert("Preset Saved");}, 200);
     }
 }
 
@@ -268,9 +261,9 @@ function applyPreset() {
 
             
         }
-
+        
         showChecked();
-
+        setTimeout(() => {alert("Preset Applied");}, 200);
     }
 
 }
