@@ -18,7 +18,7 @@ The cases and algorithms provided in the ZBLS trainer are specifically used to s
 ### Selecting Cases
 Click on the F2L groups to view the specific ZBLS cases for the group. Select the cases you would like to train.
 All of the cases for a specific F2L group can be selected by clicking the checkbox beside the cases. 
-To select or deselect every case, click the _Select All_ and _Deselect All_ buttons respectively.
+To select or deselect every case, click _Select All_ and _Deselect All_ respectively.
 
 ### Creating Presets
 Select the desired cases and click _Save_ to create a preset. Use the dropdown menu to apply and delete created presets.
