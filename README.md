@@ -24,7 +24,7 @@ To select or deselect every case, click _Select All_ and _Deselect All_ respecti
 Select the desired cases and click _Save_ to create a preset. Use the dropdown menu to apply and delete created presets.
 
 ### Training Algorithms
-Click the _Start_ button to practice the selected cases in a random order, or click _Recap_ to view each case once.
+Click _Start_ to practice the selected cases in a random order, or click _Recap_ to view each case once.
 Use the spacebar to start/stop the timer, or tap the screen if using on a mobile device.
 When in recap mode, click _Again_ or press Backspace to practice the previous case again.
 
