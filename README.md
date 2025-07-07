@@ -29,5 +29,6 @@ The cases and algorithms provided in the ZBLS trainer are specifically used to s
 
 ### Training Algorithms
 1. Click _Start_ to practise the selected cases in a random order, or click _Recap_ to review each case once
-2. Use the spacebar to start/stop the timer; tap the screen if on mobile
-3. In Recap mode, press _Again_ or backspace to practice the previous case again
+2. Follow the scramble on the top of the page to set up a ZBLS case
+3. Use the spacebar to start/stop the timer or tap the screen if on mobile
+4. In Recap mode, press _Again_ or backspace to practice the previous case again
