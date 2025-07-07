@@ -16,15 +16,18 @@ The cases and algorithms provided in the ZBLS trainer are specifically used to s
 
 ## Usage
 ### Selecting Cases
-Click on the F2L groups to view the specific ZBLS cases for the group. Select the cases you would like to train.
-All of the cases for a specific F2L group can be selected by clicking the checkbox beside the cases. 
-To select or deselect every case, click _Select All_ and _Deselect All_ respectively.
+1. Click the F2L cases to view all the ZBLS algs for that case
+2. Select the cases you would like to train
+   - check the checkbox on left to select all ZBLS algs for the corresponding F2L case
+   - select/deselect every case using the _Select All_ and _Deselect All_ buttons respectively
 
-### Creating Presets
-Select the desired cases and click _Save_ to create a preset. Use the dropdown menu to apply and delete created presets.
+### Using Presets
+1. Select the desired cases to create a preset with
+2. Name the preset and click _Save_
+3. Find the preset in the dropdown menu
+4. Click _Apply_ or _Delete_ respectively to apply/remove the preset
 
 ### Training Algorithms
-Click _Start_ to practice the selected cases in a random order, or click _Recap_ to view each case once.
-Use the spacebar to start/stop the timer, or tap the screen if using on a mobile device.
-When in recap mode, click _Again_ or press Backspace to practice the previous case again.
-
+1. Click _Start_ to practise the selected cases in a random order, or click _Recap_ to review each case once
+2. Use the spacebar to start/stop the timer; tap the screen if on mobile
+3. In Recap mode, press _Again_ or backspace to practice the previous case again
