@@ -1,7 +1,7 @@
 /* 
  * Morgan Yeh
  * 2025/01/02
- * Array of all ZBLS algorithms (unformatted)
+ * Unformatted array of all ZBLS algorithms
  */
 
 const algArray = [1,
