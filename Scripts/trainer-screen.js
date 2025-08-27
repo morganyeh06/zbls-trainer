@@ -184,17 +184,17 @@ function removeElement(c) {
     //get index of c and remove it from toRecap
     var index = toRecap.indexOf(c);
     toRecap.splice(index, 1);
+    displayCaseCount(toRecap, "numRecap", "to recap");
 
     //check if toRecap is empty
     if (toRecap.length === 0) {
-        //go back to train mode
-        recap = false;
-        document.getElementById("numRecap").innerHTML = "";
         //hide again button
         document.querySelector("#again").hidden = true;
 
-    } else {
-        displayCaseCount(toRecap, "numRecap", "to recap");
+        // display recap complete message and reload cases again
+        toRecap = copyArray(toTrain);
+        setTimeout(() => {alert("Recap complete!");}, 200);
+        setTimeout(() => {displayCaseCount(toRecap, "numRecap", "to recap");}, 200);
     }
 }
 
@@ -203,7 +203,7 @@ function getAlgList() {
     var algs = prevCase.getAlgsArray();
 
     for (var i = 0; i < algs.length; i++) {
-        algList += "- " + algs[i] + "<br>";
+        algList += "• " + algs[i] + "<br>";
     }
 
     return algList;
